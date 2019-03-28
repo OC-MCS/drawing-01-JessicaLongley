@@ -6,7 +6,8 @@
 using namespace std;
 using namespace sf;
 
-// finish the ShapeMgr class.
+// finish the ShapeMgr class. 
+//keep track of all drawn shapes
 
 class ShapeMgr
 {

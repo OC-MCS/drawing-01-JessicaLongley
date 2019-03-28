@@ -6,6 +6,7 @@ using namespace sf;
 #include "ShapeMgr.h"
 
 // finish this code; add functions, data as needed
+//handle user interface
 
 class DrawingUI
 {

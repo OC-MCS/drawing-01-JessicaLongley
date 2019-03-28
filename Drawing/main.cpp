@@ -1,5 +1,8 @@
 //================================================
-// YOUR NAME GOES HERE <-----------------  
+//Jessica Longley
+//March 29, 2019
+//Programming Assignment #7
+//Description: Drawing Program
 //================================================
 #include <iostream>
 #include <fstream>
@@ -65,6 +68,20 @@ int main()
 
 		// this should draw the left hand side of the window (all of the settings info)
 		settingsUI.draw(window);
+
+        //sample circle
+        Vector2f position;
+        position.x = 10;
+        position.y = 10;
+        Circle c(Color::Blue, position);
+        c.draw(window);
+
+        //sample rectangle
+        Vector2f position2;
+        position2.x = 100;
+        position2.y = 10;
+        Rectangle r(Color::White, position2);
+        r.draw(window);
 
 		// this should draw the rectangle that encloses the drawing area, then draw the
 		// shapes. This is passed the shapeMgr so that the drawingUI can get the shapes

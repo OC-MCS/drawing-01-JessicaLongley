@@ -40,5 +40,8 @@
     <None Include="shapes.bin">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ShapeRecord.dat">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

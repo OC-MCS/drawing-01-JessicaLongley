@@ -7,6 +7,7 @@ using namespace sf;
 enum ShapeEnum { CIRCLE, SQUARE };
 
 // finish this code; add functions, data as needed
+//keep up with current drawing settings
 
 class SettingsMgr
 {
