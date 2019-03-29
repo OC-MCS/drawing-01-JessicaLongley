@@ -165,7 +165,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ShapeRecord.dat" />
     <None Include="shapes.bin" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

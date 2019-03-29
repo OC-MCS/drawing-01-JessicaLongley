@@ -4,10 +4,10 @@
 using namespace std;
 using namespace sf;
 
-// finish this code; add functions, classes, data as needed
+//this structure will be used to record neccesicary shape data 
 struct record
 {
-    Color col;
+    int colorNumber;
     ShapeEnum shape;
     Vector2f pos;
 };
@@ -20,19 +20,19 @@ class DrawingShape
 public:
     DrawingShape(Color c, ShapeEnum s, Vector2f p)
     {
-        temp.col = c;
+        temp.colorNumber = c.toInteger();
         temp.shape = s;
         temp.pos = p;
     }
-    virtual void draw(RenderWindow &win) = 0;//pure virtual function for base class
-    //virtual record returnFileRecord() = 0;
+    virtual void draw(RenderWindow &win) = 0;//pure virtual functions for base class
+    virtual record returnFileRecord() = 0;
 };
 
 class Circle : public DrawingShape
 {
     CircleShape circ; //CircleShape is a Graphics lib class
 public:
-    //constructor
+    //constructor initializes circle and base class
     Circle(Color c, Vector2f p): DrawingShape(c, CIRCLE, p)
     {
         circ.setPosition(p);
@@ -41,23 +41,32 @@ public:
         circ.setFillColor(c);
     }
 
-    virtual void draw(RenderWindow &win)
+    void draw(RenderWindow &win) //will be used to draw circles later
     {
         win.draw(circ);
     }
 
-    //virtual record returnFileRecord();
+    record returnFileRecord() //will return a struct, ready to be put in a vector
+    {
+        record temp;
+        Color col = circ.getFillColor();
+        temp.colorNumber = col.toInteger();
+        temp.pos = circ.getPosition();
+        temp.shape = CIRCLE;
+        return temp;
+    }
+
 };
 
-// add Circle, Square classes below. These are derived from DrawingShape
-class Rectangle : public DrawingShape
+//very similar to circle class
+class Square : public DrawingShape
 {
     RectangleShape rect; 
 public:
     //constructor
-    Rectangle(Color c, Vector2f p) : DrawingShape(c, SQUARE, p)
+    Square(Color c, Vector2f p) : DrawingShape(c, SQUARE, p)
     {
-        const int SIZE = 20;
+        const int SIZE = 20; 
 
         rect.setPosition(p);
         rect.setOutlineColor(c);
@@ -65,12 +74,19 @@ public:
         rect.setFillColor(c);
         rect.setOutlineColor(c);
     }
-
-    virtual void draw(RenderWindow &win)
+    void draw(RenderWindow &win)
     {
         win.draw(rect);
     }
-    //virtual record returnFileRecord();
+    record returnFileRecord()
+    {
+        record temp;
+        Color col = rect.getFillColor();
+        temp.colorNumber = col.toInteger();
+        temp.pos = rect.getPosition();
+        temp.shape = SQUARE;
+        return temp;
+    }
 };
 
 

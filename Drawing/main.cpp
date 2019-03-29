@@ -17,7 +17,11 @@ using namespace sf;
 // Finish this code. Other than where it has comments telling you to 
 // add code, you shouldn't need to add any logic to main to satisfy
 // the requirements of this programming assignment
-
+void die(string msg)
+{
+    cout << msg << endl;
+    exit(-1);
+}
 int main()
 {
 	const int WINDOW_WIDTH = 800;
@@ -29,10 +33,18 @@ int main()
 	SettingsMgr settingsMgr(Color::Blue, ShapeEnum::CIRCLE);
 	SettingsUI  settingsUI(&settingsMgr); 
 	ShapeMgr    shapeMgr;
-	DrawingUI   drawingUI(Vector2f(200, 50));
+	DrawingUI   drawingUI(Vector2f(230, 10));
 	
-	// ********* Add code here to make the managers read from shapes file (if the file exists)
-
+	// make the managers read from shapes file (if the file exists)
+    fstream shapeFile;
+    shapeFile.open("shapes.bin", ios::in | ios::binary);
+    if (shapeFile)
+    {
+        settingsMgr.readPrevSettings(shapeFile); 
+        shapeMgr.readRecords(shapeFile);
+        shapeFile.close();
+    }
+    
 	while (window.isOpen()) 
 	{
 		Event event;
@@ -41,7 +53,11 @@ int main()
 			if (event.type == Event::Closed)
 			{
 				window.close();
-				// ****** Add code here to write all data to shapes file
+				//write all data to shapes file
+                shapeFile.open("shapes.bin", ios::out | ios::binary);
+                settingsMgr.saveSettings(shapeFile);
+                shapeMgr.writeRecords(shapeFile);
+                shapeFile.close();
 			}
 			else if (event.type == Event::MouseButtonReleased)
 			{
@@ -68,20 +84,6 @@ int main()
 
 		// this should draw the left hand side of the window (all of the settings info)
 		settingsUI.draw(window);
-
-        //sample circle
-        Vector2f position;
-        position.x = 10;
-        position.y = 10;
-        Circle c(Color::Blue, position);
-        c.draw(window);
-
-        //sample rectangle
-        Vector2f position2;
-        position2.x = 100;
-        position2.y = 10;
-        Rectangle r(Color::White, position2);
-        r.draw(window);
 
 		// this should draw the rectangle that encloses the drawing area, then draw the
 		// shapes. This is passed the shapeMgr so that the drawingUI can get the shapes
